@@ -3,955 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lead Finder ÃÂ¢ÃÂÃÂ Guards Real Estate</title>
+<title>Lead Finder - Guards Real Estate</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0a1628;
-    --blue: #1052AC;
-    --blue-light: #1a6fd8;
-    --gold: #c9a84c;
-    --gold-light: #f0d97a;
-    --cream: #f8f5ef;
-    --white: #ffffff;
-    --gray: #8a8f9e;
-    --gray-light: #f0f2f7;
-    --border: #e2e6f0;
-    --success: #1db954;
-    --danger: #e53e3e;
-    --text: #1a2035;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--navy);
-    color: var(--white);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Background texture */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: 
-      radial-gradient(ellipse at 20% 10%, rgba(16,82,172,0.25) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 90%, rgba(201,168,76,0.12) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .app {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
-
-  /* Header */
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 48px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .logo-icon {
-    width: 42px; height: 42px;
-    background: linear-gradient(135deg, var(--blue), var(--gold));
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-  }
-
-  .logo-text h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    color: var(--white);
-    line-height: 1;
-  }
-
-  .logo-text p {
-    font-size: 11px;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-top: 2px;
-  }
-
-  .status-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--gray);
-    background: rgba(255,255,255,0.05);
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .status-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--gray);
-  }
-
-  .status-dot.active { background: var(--success); box-shadow: 0 0 6px var(--success); }
-
-  /* Section title */
-  .section-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-
-  /* Card */
-  .card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 28px;
-    margin-bottom: 20px;
-    backdrop-filter: blur(10px);
-  }
-
-  .card h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    margin-bottom: 6px;
-    color: var(--white);
-  }
-
-  .card p.subtitle {
-    font-size: 13px;
-    color: var(--gray);
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-
-  /* API Key section */
-  .api-row {
-    display: flex;
-    gap: 10px;
-    align-items: stretch;
-  }
-
-  .input-wrap {
-    flex: 1;
-    position: relative;
-  }
-
-  .input-wrap input, .input-wrap textarea, .input-wrap select {
-    width: 100%;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 12px 16px;
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .input-wrap input:focus, .input-wrap textarea:focus, .input-wrap select:focus {
-    border-color: var(--blue);
-    background: rgba(16,82,172,0.1);
-  }
-
-  .input-wrap input::placeholder, .input-wrap textarea::placeholder {
-    color: rgba(255,255,255,0.25);
-  }
-
-  .input-wrap select option {
-    background: var(--navy);
-    color: var(--white);
-  }
-
-  .input-wrap textarea {
-    resize: vertical;
-    min-height: 90px;
-    line-height: 1.6;
-  }
-
-  .input-label {
-    font-size: 12px;
-    color: var(--gray);
-    margin-bottom: 6px;
-    display: block;
-  }
-
-  /* Buttons */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--blue), var(--blue-light));
-    color: white;
-    box-shadow: 0 4px 16px rgba(16,82,172,0.35);
-  }
-
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(16,82,172,0.5); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-  .btn-gold {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--navy);
-    font-weight: 600;
-    box-shadow: 0 4px 16px rgba(201,168,76,0.3);
-  }
-
-  .btn-gold:hover { transform: translateY(-1px); }
-  .btn-gold:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-  .btn-ghost {
-    background: rgba(255,255,255,0.06);
-    color: var(--gray);
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .btn-ghost:hover { background: rgba(255,255,255,0.1); color: white; }
-
-  .btn-sm { padding: 7px 14px; font-size: 12px; }
-
-  /* Search config */
-  .search-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 16px;
-  }
-
-  @media(max-width: 700px) { .search-grid { grid-template-columns: 1fr; } }
-
-  /* Progress */
-  .progress-bar-wrap {
-    height: 4px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 16px 0;
-    display: none;
-  }
-
-  .progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--blue), var(--gold));
-    border-radius: 4px;
-    transition: width 0.4s ease;
-  }
-
-  /* Stats row */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  @media(max-width: 600px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
-
-  .stat-box {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-  }
-
-  .stat-box .num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
-    color: var(--white);
-    line-height: 1;
-  }
-
-  .stat-box .num.gold { color: var(--gold); }
-  .stat-box .num.blue { color: #4da3ff; }
-  .stat-box .num.green { color: var(--success); }
-
-  .stat-box .lbl {
-    font-size: 11px;
-    color: var(--gray);
-    margin-top: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  /* Table */
-  .table-wrap {
-    overflow-x: auto;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-
-  thead tr {
-    background: rgba(16,82,172,0.2);
-  }
-
-  thead th {
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 500;
-    color: var(--gray);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    white-space: nowrap;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  tbody tr {
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    transition: background 0.15s;
-    animation: fadeRow 0.4s ease forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeRow {
-    to { opacity: 1; transform: translateY(0); }
-    from { opacity: 0; transform: translateY(6px); }
-  }
-
-  tbody tr:hover { background: rgba(255,255,255,0.04); }
-
-  tbody td {
-    padding: 12px 16px;
-    color: var(--white);
-    vertical-align: top;
-  }
-
-  .td-company { font-weight: 500; color: white; }
-  .td-meta { color: var(--gray); font-size: 12px; margin-top: 2px; }
-  .td-name { color: #7eb8ff; font-weight: 500; }
-  .td-addr { color: var(--gray); font-size: 12px; line-height: 1.5; max-width: 200px; }
-
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 500;
-  }
-
-  .badge-active { background: rgba(29,185,84,0.15); color: var(--success); }
-  .badge-sic { background: rgba(16,82,172,0.2); color: #7eb8ff; }
-
-  .copy-btn {
-    background: none;
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--gray);
-    border-radius: 6px;
-    padding: 3px 8px;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .copy-btn:hover { background: rgba(255,255,255,0.08); color: white; }
-
-  /* Log */
-  .log-box {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 10px;
-    padding: 14px 16px;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    color: #7eb8ff;
-    max-height: 140px;
-    overflow-y: auto;
-    line-height: 1.8;
-    display: none;
-  }
-
-  .log-line { animation: fadeIn 0.3s ease; }
-  .log-ok { color: var(--success); }
-  .log-warn { color: var(--gold); }
-  .log-err { color: var(--danger); }
-
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-  /* Alert */
-  .alert {
-    padding: 12px 16px;
-    border-radius: 10px;
-    font-size: 13px;
-    margin-bottom: 16px;
-    display: none;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .alert-info { background: rgba(16,82,172,0.15); border: 1px solid rgba(16,82,172,0.3); color: #7eb8ff; display: flex; }
-  .alert-warn { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: var(--gold-light); }
-  .alert-err { background: rgba(229,62,62,0.12); border: 1px solid rgba(229,62,62,0.3); color: #fc8181; }
-
-  /* Export row */
-  .export-row {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 16px;
-  }
-
-  /* Empty state */
-  .empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--gray);
-  }
-
-  .empty .icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
-  .empty p { font-size: 14px; }
-
-  /* Spinner */
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .spin { animation: spin 0.8s linear infinite; display: inline-block; }
-
-  /* Divider */
-  .divider {
-    height: 1px;
-    background: rgba(255,255,255,0.06);
-    margin: 20px 0;
-  }
-
-  .row { display: flex; gap: 12px; align-items: flex-end; }
-  .row .input-wrap { flex: 1; }
+:root{--navy:#0a1628;--blue:#1052AC;--blue-l:#1a6fd8;--gold:#c9a84c;--gold-l:#f0d97a;--gray:#8a8f9e;--success:#1db954;--danger:#e53e3e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:#fff;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(16,82,172,.25) 0%,transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(201,168,76,.12) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 24px 80px;}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08);}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--blue),var(--gold));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.logo h1{font-family:'DM Serif Display',serif;font-size:18px;}
+.logo p{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;}
+.status-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray);background:rgba(255,255,255,.05);padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.08);}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--gray);}
+.dot.on{background:var(--success);box-shadow:0 0 6px var(--success);}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;margin-bottom:20px;}
+.step-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:6px;}
+.card h2{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:4px;}
+.sub{font-size:13px;color:var(--gray);margin-bottom:18px;line-height:1.6;}
+.row{display:flex;gap:10px;}.row input{flex:1;}
+input,select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;width:100%;transition:border-color .2s;}
+input:focus,select:focus{border-color:var(--blue);}
+input::placeholder{color:rgba(255,255,255,.25);}
+select option{background:var(--navy);}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all .2s;}
+.btn-p{background:linear-gradient(135deg,var(--blue),var(--blue-l));color:#fff;}
+.btn-p:disabled{opacity:.5;cursor:not-allowed;}
+.btn-g{background:linear-gradient(135deg,var(--gold),var(--gold-l));color:#0a1628;font-weight:600;}
+.btn-g:disabled{opacity:.5;cursor:not-allowed;}
+.btn-gh{background:rgba(255,255,255,.06);color:var(--gray);border:1px solid rgba(255,255,255,.1);}
+.btn-gh:hover{background:rgba(255,255,255,.1);color:#fff;}
+.alert{padding:10px 14px;border-radius:10px;font-size:13px;margin-top:12px;display:none;}
+.alert.show{display:block;}
+.a-ok{background:rgba(29,185,84,.15);border:1px solid rgba(29,185,84,.3);color:#6ee7a0;}
+.a-err{background:rgba(229,62,62,.15);border:1px solid rgba(229,62,62,.3);color:#fc8181;}
+.a-info{background:rgba(16,82,172,.15);border:1px solid rgba(16,82,172,.3);color:#7eb8ff;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+.field label{font-size:12px;color:var(--gray);display:block;margin-bottom:5px;}
+.pw{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin:14px 0;display:none;}
+.pb{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transition:width .4s;}
+.lb{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;font-family:monospace;font-size:12px;max-height:130px;overflow-y:auto;line-height:1.8;display:none;margin-top:12px;}
+.lok{color:var(--success);}.lwarn{color:var(--gold);}.lerr{color:var(--danger);}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.stat{background:rgba(255,255,255,.04);border-radius:12px;padding:14px;text-align:center;}
+.sn{font-family:'DM Serif Display',serif;font-size:26px;}
+.sl{font-size:11px;color:var(--gray);margin-top:3px;text-transform:uppercase;}
+.tw{overflow-x:auto;border-radius:12px;border:1px solid rgba(255,255,255,.08);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--gray);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(16,82,172,.15);white-space:nowrap;}
+td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.03);}
+.cn{font-weight:500;}.cnum{font-size:11px;color:var(--gray);}
+.dn{color:#7eb8ff;}.dr{font-size:11px;color:var(--gray);}
+.addr{font-size:12px;color:var(--gray);max-width:180px;line-height:1.5;}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;}
+.bok{background:rgba(29,185,84,.15);color:var(--success);}
+.bsic{background:rgba(16,82,172,.2);color:#7eb8ff;}
+.er{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;align-items:center;}
+.hint{font-size:12px;color:var(--gray);margin-left:auto;}
+.sm{padding:8px 16px;font-size:13px;}
 </style>
 </head>
 <body>
 <div class="app">
-
-  <!-- Header -->
   <div class="header">
     <div class="logo">
-      <div class="logo-icon">ÃÂ°ÃÂÃÂÃÂ¢</div>
-      <div class="logo-text">
-        <h1>Lead Finder</h1>
-        <p>Guards Real Estate ÃÂÃÂ· Powered by Companies House</p>
-      </div>
+      <div class="logo-icon">&#127970;</div>
+      <div><h1>Lead Finder</h1><p>Guards Real Estate</p></div>
     </div>
-    <div class="status-badge">
-      <div class="status-dot" id="statusDot"></div>
-      <span id="statusText">Not connected</span>
+    <div class="status-pill">
+      <div class="dot" id="dot"></div>
+      <span id="stxt">Not connected</span>
     </div>
   </div>
-
-  <!-- Step 1: API Key -->
   <div class="card">
-    <div class="section-label">Step 1</div>
-    <h2>Connect Companies House API</h2>
-    <p class="subtitle">Free API key ÃÂ¢ÃÂÃÂ register at <strong style="color:#7eb8ff">developer.company-information.service.gov.uk</strong> ÃÂ¢ÃÂÃÂ Create an account ÃÂ¢ÃÂÃÂ Create new application ÃÂ¢ÃÂÃÂ Copy your Live API key below.</p>
-
-    <div class="api-row">
-      <div class="input-wrap">
-        <input type="password" id="apiKey" placeholder="Paste your Companies House API key here..." />
-      </div>
-      <button class="btn btn-primary" onclick="testApiKey()">
-        <span>Test Key</span>
-      </button>
-    </div>
-
-    <div class="alert alert-info" id="apiAlert" style="margin-top:12px;">
-      <span>ÃÂ¢ÃÂÃÂ¹ÃÂ¯ÃÂ¸ÃÂ</span>
-      <span id="apiAlertText"></span>
-    </div>
-  </div>
-
-  <!-- Step 2: Search -->
-  <div class="card">
-    <div class="section-label">Step 2</div>
-    <h2>Search by Area</h2>
-    <p class="subtitle">Enter a London area or postcode. The system will find all active property companies registered there and pull their directors automatically.</p>
-
-    <div class="search-grid">
-      <div>
-        <label class="input-label">Area / Postcode</label>
-        <div class="input-wrap">
-          <input type="text" id="searchArea" placeholder="e.g. Mayfair, SW1, W1J..." />
-        </div>
-      </div>
-      <div>
-        <label class="input-label">Property Type Filter</label>
-        <div class="input-wrap">
-          <select id="sicFilter">
-            <option value="">All Property SIC Codes</option>
-            <option value="68100">68100 ÃÂ¢ÃÂÃÂ Buying/Selling Own Property</option>
-            <option value="68200">68200 ÃÂ¢ÃÂÃÂ Letting Own Property (Landlords)</option>
-            <option value="68310">68310 ÃÂ¢ÃÂÃÂ Estate Agencies</option>
-            <option value="68320">68320 ÃÂ¢ÃÂÃÂ Property Management</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label class="input-label">Max Results</label>
-        <div class="input-wrap">
-          <select id="maxResults">
-            <option value="20">20 companies</option>
-            <option value="50" selected>50 companies</option>
-            <option value="100">100 companies</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
+    <div class="step-label">Step 1</div>
+    <h2>Connect API Key</h2>
+    <p class="sub">Paste your Companies House Live API key and click Test Key.</p>
     <div class="row">
-      <button class="btn btn-gold" id="searchBtn" onclick="runSearch()" disabled>
-        ÃÂ°ÃÂÃÂÃÂ Find Companies & Owners
-      </button>
-      <button class="btn btn-ghost" onclick="clearResults()">Clear</button>
+      <input type="password" id="K" placeholder="Paste your Companies House API key..." />
+      <button class="btn btn-p" onclick="testKey()">Test Key</button>
     </div>
-
-    <div class="progress-bar-wrap" id="progressWrap">
-      <div class="progress-bar" id="progressBar" style="width:0%"></div>
-    </div>
-
-    <div class="log-box" id="logBox"></div>
+    <div class="alert" id="kalert"></div>
   </div>
-
-  <!-- Step 3: Results -->
-  <div class="card" id="resultsCard" style="display:none">
-    <div class="section-label">Step 3 ÃÂ¢ÃÂÃÂ Results</div>
-    <h2>Lead List</h2>
-    <p class="subtitle">Companies found with registered directors. Use these names to enrich contact details via LinkedIn or Apollo.io.</p>
-
-    <div class="stats-row" id="statsRow">
-      <div class="stat-box"><div class="num blue" id="statCompanies">0</div><div class="lbl">Companies</div></div>
-      <div class="stat-box"><div class="num gold" id="statDirectors">0</div><div class="lbl">Directors</div></div>
-      <div class="stat-box"><div class="num green" id="statActive">0</div><div class="lbl">Active</div></div>
-      <div class="stat-box"><div class="num" id="statSIC">ÃÂ¢ÃÂÃÂ</div><div class="lbl">SIC Focus</div></div>
+  <div class="card">
+    <div class="step-label">Step 2</div>
+    <h2>Search by Area</h2>
+    <p class="sub">Enter a London area or postcode to find active property companies and their directors.</p>
+    <div class="g3">
+      <div class="field"><label>Area or postcode</label><input type="text" id="A" placeholder="e.g. Mayfair, SW1, W1J" /></div>
+      <div class="field"><label>Property type</label>
+        <select id="S">
+          <option value="">All property SIC codes</option>
+          <option value="68100">68100 - Buying/selling own property</option>
+          <option value="68200">68200 - Letting own property</option>
+          <option value="68310">68310 - Estate agencies</option>
+          <option value="68320">68320 - Property management</option>
+        </select>
+      </div>
+      <div class="field"><label>Max results</label>
+        <select id="M">
+          <option value="20">20 companies</option>
+          <option value="50" selected>50 companies</option>
+          <option value="100">100 companies</option>
+        </select>
+      </div>
     </div>
-
-    <div class="table-wrap">
+    <div class="row">
+      <button class="btn btn-g" id="sbtn" onclick="doSearch()" disabled>Search Companies and Owners</button>
+      <button class="btn btn-gh" onclick="clearAll()">Clear</button>
+    </div>
+    <div class="pw" id="pw"><div class="pb" id="pb" style="width:0%"></div></div>
+    <div class="lb" id="lb"></div>
+  </div>
+  <div class="card" id="RC" style="display:none">
+    <div class="step-label">Step 3 - Results</div>
+    <h2 style="margin-bottom:14px">Lead List</h2>
+    <div class="stats">
+      <div class="stat"><div class="sn" style="color:#7eb8ff" id="sc">0</div><div class="sl">Companies</div></div>
+      <div class="stat"><div class="sn" style="color:var(--gold)" id="sd">0</div><div class="sl">Directors</div></div>
+      <div class="stat"><div class="sn" style="color:var(--success)" id="sa">0</div><div class="sl">Active</div></div>
+      <div class="stat"><div class="sn" id="ss">All</div><div class="sl">Filter</div></div>
+    </div>
+    <div class="tw">
       <table>
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th>Director / Owner</th>
-            <th>Registered Address</th>
-            <th>SIC</th>
-            <th>Status</th>
-            <th>Incorporated</th>
-          </tr>
-        </thead>
-        <tbody id="resultsBody">
-        </tbody>
+        <thead><tr><th>Company</th><th>Director/Owner</th><th>Address</th><th>SIC</th><th>Status</th><th>Incorporated</th></tr></thead>
+        <tbody id="TB"></tbody>
       </table>
     </div>
-
-    <div class="export-row">
-      <button class="btn btn-primary btn-sm" onclick="exportCSV()">ÃÂ¢ÃÂ¬ÃÂ Export CSV</button>
-      <button class="btn btn-ghost btn-sm" onclick="copyAll()">ÃÂ°ÃÂÃÂÃÂ Copy All</button>
-      <span style="font-size:12px; color:var(--gray); margin-left:auto;" id="exportCount"></span>
+    <div class="er">
+      <button class="btn btn-p sm" onclick="exportCSV()">Export CSV</button>
+      <button class="btn btn-gh sm" onclick="copyAll()">Copy All</button>
+      <span class="hint" id="hint"></span>
     </div>
   </div>
-
-  <!-- Info card -->
-  <div class="card" style="border-color: rgba(201,168,76,0.2);">
-    <div class="section-label" style="color:var(--gold)">How to get contact details</div>
-    <h2>Next Step After Export</h2>
-    <p class="subtitle">Companies House gives you company name + director name + address. To get email and phone, use these free/cheap tools:</p>
-    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-top:4px;">
-      <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:14px;">
-        <div style="font-size:13px; font-weight:600; color:#7eb8ff; margin-bottom:4px;">ÃÂ°ÃÂÃÂÃÂ LinkedIn</div>
-        <div style="font-size:12px; color:var(--gray); line-height:1.5;">Search director name ÃÂ¢ÃÂÃÂ find their profile ÃÂ¢ÃÂÃÂ message directly or get email via Sales Navigator</div>
-      </div>
-      <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:14px;">
-        <div style="font-size:13px; font-weight:600; color:#7eb8ff; margin-bottom:4px;">ÃÂ°ÃÂÃÂÃÂ§ Hunter.io</div>
-        <div style="font-size:12px; color:var(--gray); line-height:1.5;">Enter company domain ÃÂ¢ÃÂÃÂ finds professional email addresses. Free tier: 25 searches/month</div>
-      </div>
-      <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:14px;">
-        <div style="font-size:13px; font-weight:600; color:#7eb8ff; margin-bottom:4px;">ÃÂ°ÃÂÃÂÃÂ Apollo.io</div>
-        <div style="font-size:12px; color:var(--gray); line-height:1.5;">Best option ÃÂ¢ÃÂÃÂ enter name + company ÃÂ¢ÃÂÃÂ gets email + phone + LinkedIn. Free: 50 leads/month</div>
-      </div>
-    </div>
-  </div>
-
 </div>
-
 <script>
-  let apiKey = '';
-  let allLeads = [];
-
-  function getKey() {
-    // Always read fresh from the input to avoid any variable pollution
-    return document.getElementById('apiKey').value.trim();
-  }
-
-  async function testApiKey() {
-    const key = getKey();
-    if (!key) { showApiAlert('Please paste your API key first.', 'warn'); return; }
-
-    showApiAlert('Testing connection...', 'info');
-    try {
-      const encoded = btoa(key + ':');
-      const proxyUrl = `/.netlify/functions/proxy?path=${encodeURIComponent('/search/companies?q=guards+real+estate&items_per_page=1')}&key=${encodeURIComponent(k)}`;
-      const res = await fetch(proxyUrl);
-      if (res.ok) {
-        apiKey = key;
-        document.getElementById('statusDot').classList.add('active');
-        document.getElementById('statusText').textContent = 'Connected';
-        document.getElementById('searchBtn').disabled = false;
-        showApiAlert('ÃÂ¢ÃÂÃÂ API key verified! You can now search.', 'ok');
-      } else {
-        showApiAlert(`ÃÂ¢ÃÂÃÂ Error ${res.status}. Check your key and try again.`, 'err');
-      }
-    } catch(e) {
-      showApiAlert(`ÃÂ¢ÃÂÃÂ Connection failed: ${e.message}`, 'err');
+var leads=[];
+function getKey(){return document.getElementById('K').value.trim();}
+function callAPI(path){return fetch('/.netlify/functions/proxy?path='+encodeURIComponent(path)+'&key='+encodeURIComponent(getKey()));}
+function showAlert(id,msg,t){var e=document.getElementById(id);e.className='alert show a-'+t;e.textContent=msg;}
+function log(msg,t){var b=document.getElementById('lb');b.style.display='block';var d=document.createElement('div');d.className=t==='ok'?'lok':t==='warn'?'lwarn':t==='err'?'lerr':'';d.textContent='['+new Date().toLocaleTimeString('en-GB')+'] '+msg;b.appendChild(d);b.scrollTop=b.scrollHeight;}
+function prog(p){document.getElementById('pw').style.display='block';document.getElementById('pb').style.width=p+'%';}
+function fmtA(a){if(!a)return'-';if(typeof a==='string')return a;return[a.premises,a.address_line_1,a.address_line_2,a.locality,a.postal_code].filter(Boolean).join(', ')||'-';}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
+async function testKey(){
+  var k=getKey();
+  if(!k){showAlert('kalert','Please paste your API key first.','err');return;}
+  showAlert('kalert','Testing connection...','info');
+  try{
+    var r=await callAPI('/search/companies?q=guards+real+estate&items_per_page=1');
+    if(r.ok){
+      document.getElementById('dot').className='dot on';
+      document.getElementById('stxt').textContent='Connected';
+      document.getElementById('sbtn').disabled=false;
+      showAlert('kalert','API key verified - ready to search.','ok');
+    }else{
+      showAlert('kalert','Error '+r.status+'. Check your key.','err');
     }
-  }
-
-  // ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Core fetch wrapper ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
-  async function fetchCH(url) {
-    const path = url.replace('https://api.company-information.service.gov.uk', '');
-    const proxyUrl = `/.netlify/functions/proxy?path=${encodeURIComponent(path)}&key=${encodeURIComponent(getKey())}`;
-    return await fetch(proxyUrl);
-  }
-
-  function showApiAlert(msg, type) {
-    const el = document.getElementById('apiAlert');
-    const txt = document.getElementById('apiAlertText');
-    el.className = `alert alert-${type === 'ok' ? 'info' : type === 'warn' ? 'warn' : type === 'err' ? 'err' : 'info'}`;
-    el.style.display = 'flex';
-    txt.textContent = msg;
-  }
-
-  // ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Log ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
-  function log(msg, type='') {
-    const box = document.getElementById('logBox');
-    box.style.display = 'block';
-    const line = document.createElement('div');
-    line.className = `log-line ${type === 'ok' ? 'log-ok' : type === 'warn' ? 'log-warn' : type === 'err' ? 'log-err' : ''}`;
-    const time = new Date().toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    line.textContent = `[${time}] ${msg}`;
-    box.appendChild(line);
-    box.scrollTop = box.scrollHeight;
-  }
-
-  function setProgress(pct) {
-    document.getElementById('progressWrap').style.display = 'block';
-    document.getElementById('progressBar').style.width = pct + '%';
-  }
-
-  // ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Main Search ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
-  async function runSearch() {
-    const area = document.getElementById('searchArea').value.trim();
-    const sic = document.getElementById('sicFilter').value;
-    const maxR = parseInt(document.getElementById('maxResults').value);
-
-    if (!area) { alert('Please enter an area or postcode.'); return; }
-    if (!getKey()) { alert('Please connect your API key first.'); return; }
-
-    // Reset
-    allLeads = [];
-    document.getElementById('logBox').innerHTML = '';
-    document.getElementById('logBox').style.display = 'block';
-    document.getElementById('resultsBody').innerHTML = '';
-    document.getElementById('resultsCard').style.display = 'none';
-    document.getElementById('searchBtn').disabled = true;
-    document.getElementById('searchBtn').innerHTML = '<span class="spin">ÃÂ¢ÃÂÃÂ³</span> Searching...';
-
-    log(`Starting search for: "${area}" ${sic ? 'ÃÂÃÂ· SIC ' + sic : 'ÃÂÃÂ· All property SIC codes'}`);
-    setProgress(5);
-
-    try {
-      // Build search query
-      const query = sic 
-        ? `${area}&sic_codes=${sic}&company_status=active`
-        : `${area}&company_status=active`;
-      
-      // Search companies
-      log(`Querying Companies House API...`);
-      const searchRes = await fetchCH(
-        `https://api.company-information.service.gov.uk/advanced-search/companies?company_name_includes=${encodeURIComponent(area)}&company_status=active&size=${maxR}&sic_codes=${sic || '68100,68200,68310,68320'}`
-      );
-
-      let companies = [];
-
-      if (searchRes.ok) {
-        const data = await searchRes.json();
-        companies = data.items || [];
-        log(`Found ${companies.length} companies via advanced search`, 'ok');
-      }
-
-      // Fallback: regular search filtered by area in address
-      if (companies.length === 0) {
-        log(`Trying standard search...`, 'warn');
-        const fallback = await fetchCH(
-          `https://api.company-information.service.gov.uk/search/companies?q=${encodeURIComponent(area + ' property')}&items_per_page=${maxR}`
-        );
-        if (fallback.ok) {
-          const fd = await fallback.json();
-          companies = (fd.items || []).filter(c => 
-            c.company_status === 'active' || !c.company_status
-          );
-          log(`Found ${companies.length} companies via standard search`, 'ok');
-        }
-      }
-
-      if (companies.length === 0) {
-        log('No companies found. Try a different area or postcode.', 'warn');
-        document.getElementById('searchBtn').disabled = false;
-        document.getElementById('searchBtn').innerHTML = 'ÃÂ°ÃÂÃÂÃÂ Find Companies & Owners';
-        return;
-      }
-
-      setProgress(20);
-      log(`Fetching director details for each company...`);
-
-      // Fetch officers for each company
-      for (let i = 0; i < companies.length; i++) {
-        const co = companies[i];
-        const num = co.company_number;
-        if (!num) continue;
-
-        setProgress(20 + Math.floor((i / companies.length) * 70));
-
-        try {
-          const offRes = await fetchCH(
-            `https://api.company-information.service.gov.uk/company/${num}/officers`
-          );
-
-          let officers = [];
-          if (offRes.ok) {
-            const od = await offRes.json();
-            officers = (od.items || []).filter(o => 
-              o.resigned_on === undefined && 
-              (o.officer_role === 'director' || o.officer_role === 'llp-member')
-            );
-          }
-
-          // Get company profile for SIC
-          let sicCodes = co.sic_codes || [];
-          if (sicCodes.length === 0) {
-            try {
-              const profRes = await fetchCH(
-                `https://api.company-information.service.gov.uk/company/${num}`
-              );
-              if (profRes.ok) {
-                const pd = await profRes.json();
-                sicCodes = pd.sic_codes || [];
-              }
-            } catch(e) {}
-          }
-
-          const lead = {
-            companyName: co.title || co.company_name || 'ÃÂ¢ÃÂÃÂ',
-            companyNumber: num,
-            status: co.company_status || 'active',
-            incorporated: co.date_of_creation || co.incorporation_date || 'ÃÂ¢ÃÂÃÂ',
-            address: formatAddress(co.registered_office_address || co.address),
-            sicCodes: sicCodes,
-            officers: officers.map(o => ({
-              name: o.name || 'ÃÂ¢ÃÂÃÂ',
-              role: o.officer_role || 'director',
-              dob: o.date_of_birth ? `${o.date_of_birth.month}/${o.date_of_birth.year}` : 'ÃÂ¢ÃÂÃÂ',
-              address: formatAddress(o.address)
-            }))
-          };
-
-          allLeads.push(lead);
-
-          if (officers.length > 0) {
-            log(`ÃÂ¢ÃÂÃÂ ${co.title || num} ÃÂ¢ÃÂÃÂ ${officers.length} director(s) found`, 'ok');
-          } else {
-            log(`ÃÂ¢ÃÂÃÂ ${co.title || num} ÃÂ¢ÃÂÃÂ no active directors listed`, 'warn');
-          }
-
-          // Small delay to be respectful
-          await sleep(150);
-
-        } catch(err) {
-          log(`ÃÂ¢ÃÂÃÂ  Error fetching ${num}: ${err.message}`, 'warn');
-        }
-      }
-
-      setProgress(100);
-      log(`Done. ${allLeads.length} companies processed.`, 'ok');
-
-      renderResults();
-
-    } catch(err) {
-      log(`Fatal error: ${err.message}`, 'err');
+  }catch(e){showAlert('kalert','Connection failed: '+e.message,'err');}
+}
+async function doSearch(){
+  var area=document.getElementById('A').value.trim();
+  var sic=document.getElementById('S').value;
+  var maxR=parseInt(document.getElementById('M').value);
+  if(!area){alert('Please enter an area.');return;}
+  if(!getKey()){alert('Please connect your API key first.');return;}
+  leads=[];
+  document.getElementById('lb').innerHTML='';
+  document.getElementById('TB').innerHTML='';
+  document.getElementById('RC').style.display='none';
+  document.getElementById('sbtn').disabled=true;
+  document.getElementById('sbtn').textContent='Searching...';
+  log('Searching "'+area+'"...');
+  prog(5);
+  try{
+    var companies=[];
+    var sp=sic||'68100,68200,68310,68320';
+    var r1=await callAPI('/advanced-search/companies?location='+encodeURIComponent(area)+'&sic_codes='+sp+'&company_status=active&size='+maxR);
+    if(r1.ok){var d1=await r1.json();companies=d1.items||[];log('Found '+companies.length+' companies','ok');}
+    if(!companies.length){
+      log('Trying standard search...','warn');
+      var r2=await callAPI('/search/companies?q='+encodeURIComponent(area+' property')+'&items_per_page='+maxR);
+      if(r2.ok){var d2=await r2.json();companies=(d2.items||[]).filter(function(c){return!c.company_status||c.company_status==='active';});log('Found '+companies.length+' companies','ok');}
     }
-
-    document.getElementById('searchBtn').disabled = false;
-    document.getElementById('searchBtn').innerHTML = 'ÃÂ°ÃÂÃÂÃÂ Find Companies & Owners';
-  }
-
-  function formatAddress(addr) {
-    if (!addr) return 'ÃÂ¢ÃÂÃÂ';
-    if (typeof addr === 'string') return addr;
-    const parts = [
-      addr.premises, addr.address_line_1, addr.address_line_2,
-      addr.locality, addr.region, addr.postal_code
-    ].filter(Boolean);
-    return parts.join(', ') || 'ÃÂ¢ÃÂÃÂ';
-  }
-
-  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-  // ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Render ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
-  function renderResults() {
-    const tbody = document.getElementById('resultsBody');
-    tbody.innerHTML = '';
-
-    let totalDirectors = 0;
-    let activeCount = 0;
-
-    allLeads.forEach((lead, idx) => {
-      const isActive = lead.status === 'active';
-      if (isActive) activeCount++;
-
-      const dirRows = lead.officers.length > 0 ? lead.officers : [{ name: 'Not listed', role: '', dob: '', address: '' }];
-      totalDirectors += lead.officers.length;
-
-      dirRows.forEach((officer, oi) => {
-        const tr = document.createElement('tr');
-        tr.style.animationDelay = `${idx * 40}ms`;
-
-        tr.innerHTML = `
-          <td>
-            ${oi === 0 ? `<div class="td-company">${lead.companyName}</div>
-            <div class="td-meta">#${lead.companyNumber}</div>` : ''}
-          </td>
-          <td>
-            <div class="td-name">${officer.name}</div>
-            ${officer.role ? `<div class="td-meta">${officer.role}</div>` : ''}
-          </td>
-          <td>
-            <div class="td-addr">${oi === 0 ? lead.address : (officer.address || 'ÃÂ¢ÃÂÃÂ')}</div>
-          </td>
-          <td>
-            ${oi === 0 && lead.sicCodes.length > 0 
-              ? lead.sicCodes.map(s => `<span class="badge badge-sic">${s}</span>`).join(' ')
-              : (oi === 0 ? 'ÃÂ¢ÃÂÃÂ' : '')}
-          </td>
-          <td>
-            ${oi === 0 ? `<span class="badge ${isActive ? 'badge-active' : ''}">${lead.status || 'unknown'}</span>` : ''}
-          </td>
-          <td style="color:var(--gray); font-size:12px;">
-            ${oi === 0 ? lead.incorporated : ''}
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
+    if(!companies.length){log('No companies found. Try different area.','warn');document.getElementById('sbtn').disabled=false;document.getElementById('sbtn').textContent='Search Companies and Owners';return;}
+    prog(15);log('Fetching directors...');
+    for(var i=0;i<companies.length;i++){
+      var co=companies[i];var num=co.company_number;if(!num)continue;
+      prog(15+Math.floor((i/companies.length)*75));
+      var officers=[];var sics=co.sic_codes||[];
+      try{var or=await callAPI('/company/'+num+'/officers');if(or.ok){var od=await or.json();officers=(od.items||[]).filter(function(o){return!o.resigned_on&&(o.officer_role==='director'||o.officer_role==='llp-member');});}}catch(e){}
+      if(!sics.length){try{var pr=await callAPI('/company/'+num);if(pr.ok){var pd=await pr.json();sics=pd.sic_codes||[];}}catch(e){}}
+      var lead={name:co.title||co.company_name||'-',number:num,status:co.company_status||'active',inc:co.date_of_creation||'-',addr:fmtA(co.registered_office_address||co.address),sics:sics,dirs:officers.map(function(o){return{name:o.name||'-',role:o.officer_role||'',addr:fmtA(o.address)};})};
+      leads.push(lead);
+      if(officers.length)log('OK '+lead.name+' - '+officers.length+' director(s)','ok');
+      else log('-- '+lead.name+' - no directors','warn');
+      await sleep(150);
+    }
+    prog(100);log('Done. '+leads.length+' companies.','ok');render();
+  }catch(e){log('Error: '+e.message,'err');}
+  document.getElementById('sbtn').disabled=false;
+  document.getElementById('sbtn').textContent='Search Companies and Owners';
+}
+function render(){
+  var tb=document.getElementById('TB');tb.innerHTML='';
+  var td=0,ta=0;
+  leads.forEach(function(lead){
+    var ia=lead.status==='active';if(ia)ta++;
+    var dirs=lead.dirs.length?lead.dirs:[{name:'Not listed',role:'',addr:''}];
+    td+=lead.dirs.length;
+    dirs.forEach(function(o,oi){
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td>'+(oi===0?'<div class="cn">'+lead.name+'</div><div class="cnum">#'+lead.number+'</div>':'')+'</td>'+
+        '<td><div class="dn">'+o.name+'</div>'+(o.role?'<div class="dr">'+o.role+'</div>':'')+'</td>'+
+        '<td><div class="addr">'+(oi===0?lead.addr:o.addr||'-')+'</div></td>'+
+        '<td>'+(oi===0&&lead.sics.length?lead.sics.map(function(s){return'<span class="badge bsic">'+s+'</span>';}).join(' '):(oi===0?'-':''))+'</td>'+
+        '<td>'+(oi===0?'<span class="badge '+(ia?'bok':'')+'">'+(lead.status||'-')+'</span>':'')+'</td>'+
+        '<td style="font-size:12px;color:var(--gray)">'+(oi===0?lead.inc:'')+'</td>';
+      tb.appendChild(tr);
     });
-
-    // Stats
-    document.getElementById('statCompanies').textContent = allLeads.length;
-    document.getElementById('statDirectors').textContent = totalDirectors;
-    document.getElementById('statActive').textContent = activeCount;
-    document.getElementById('statSIC').textContent = document.getElementById('sicFilter').selectedOptions[0].text.split('ÃÂ¢ÃÂÃÂ')[0].trim() || 'All';
-    document.getElementById('exportCount').textContent = `${allLeads.length} companies ÃÂÃÂ· ${totalDirectors} directors`;
-
-    document.getElementById('resultsCard').style.display = 'block';
-    document.getElementById('resultsCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  // ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Export ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
-  function exportCSV() {
-    if (allLeads.length === 0) return;
-
-    const rows = [['Company Name', 'Company Number', 'Status', 'Incorporated', 'SIC Codes', 'Director Name', 'Director Role', 'Registered Address', 'Director Address']];
-
-    allLeads.forEach(lead => {
-      if (lead.officers.length === 0) {
-        rows.push([
-          lead.companyName, lead.companyNumber, lead.status,
-          lead.incorporated, lead.sicCodes.join('; '),
-          'Not listed', '', lead.address, ''
-        ]);
-      } else {
-        lead.officers.forEach(o => {
-          rows.push([
-            lead.companyName, lead.companyNumber, lead.status,
-            lead.incorporated, lead.sicCodes.join('; '),
-            o.name, o.role, lead.address, o.address || ''
-          ]);
-        });
-      }
-    });
-
-    const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `guards-leads-${document.getElementById('searchArea').value}-${Date.now()}.csv`;
-    a.click();
-  }
-
-  function copyAll() {
-    if (allLeads.length === 0) return;
-    let text = '';
-    allLeads.forEach(lead => {
-      text += `${lead.companyName} (${lead.companyNumber})\n`;
-      text += `  Address: ${lead.address}\n`;
-      lead.officers.forEach(o => text += `  Director: ${o.name} ÃÂÃÂ· ${o.role}\n`);
-      text += '\n';
-    });
-    navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
-  }
-
-  function clearResults() {
-    allLeads = [];
-    document.getElementById('resultsBody').innerHTML = '';
-    document.getElementById('resultsCard').style.display = 'none';
-    document.getElementById('logBox').innerHTML = '';
-    document.getElementById('logBox').style.display = 'none';
-    document.getElementById('progressWrap').style.display = 'none';
-    document.getElementById('progressBar').style.width = '0%';
-    document.getElementById('searchArea').value = '';
-  }
-
-  // Allow Enter key on API field
-  document.getElementById('apiKey').addEventListener('keydown', e => { if (e.key === 'Enter') testApiKey(); });
-  document.getElementById('searchArea').addEventListener('keydown', e => { if (e.key === 'Enter' && !document.getElementById('searchBtn').disabled) runSearch(); });
-
-  // Detect if running from file:// and warn
-  if (window.location.protocol === 'file:') {
-    const warn = document.createElement('div');
-    warn.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#c9a84c;color:#0a1628;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:999;max-width:320px;line-height:1.5;box-shadow:0 4px 20px rgba(0,0,0,0.4)';
-    warn.innerHTML = 'ÃÂ¢ÃÂÃÂ ÃÂ¯ÃÂ¸ÃÂ <strong>To avoid CORS errors</strong>: Open this file in VS Code with Live Server, or drag it into Chrome from Claude\'s artifact viewer. The API key is valid ÃÂ¢ÃÂÃÂ it\'s a browser restriction on local files.';
-    document.body.appendChild(warn);
-    setTimeout(() => warn.style.opacity = '0.7', 5000);
-  }
+  });
+  document.getElementById('sc').textContent=leads.length;
+  document.getElementById('sd').textContent=td;
+  document.getElementById('sa').textContent=ta;
+  document.getElementById('ss').textContent=document.getElementById('S').value||'All';
+  document.getElementById('hint').textContent=leads.length+' companies - '+td+' directors';
+  document.getElementById('RC').style.display='block';
+}
+function exportCSV(){
+  if(!leads.length)return;
+  var rows=[['Company','Number','Status','Incorporated','SIC','Director','Role','Address']];
+  leads.forEach(function(l){
+    if(!l.dirs.length)rows.push([l.name,l.number,l.status,l.inc,l.sics.join(';'),'Not listed','',l.addr]);
+    else l.dirs.forEach(function(o){rows.push([l.name,l.number,l.status,l.inc,l.sics.join(';'),o.name,o.role,l.addr]);});
+  });
+  var csv=rows.map(function(r){return r.map(function(c){return'"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('
+');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='guards-leads-'+Date.now()+'.csv';a.click();
+}
+function copyAll(){
+  var t='';
+  leads.forEach(function(l){t+=l.name+' ('+l.number+')
+  Addr: '+l.addr+'
+';l.dirs.forEach(function(o){t+='  Director: '+o.name+' - '+o.role+'
+';});t+='
+';});
+  navigator.clipboard.writeText(t).then(function(){alert('Copied!');});
+}
+function clearAll(){
+  leads=[];document.getElementById('TB').innerHTML='';document.getElementById('RC').style.display='none';
+  document.getElementById('lb').innerHTML='';document.getElementById('lb').style.display='none';
+  document.getElementById('pw').style.display='none';document.getElementById('A').value='';
+}
+document.getElementById('K').addEventListener('keydown',function(e){if(e.key==='Enter')testKey();});
+document.getElementById('A').addEventListener('keydown',function(e){if(e.key==='Enter'&&!document.getElementById('sbtn').disabled)doSearch();});
 </script>
 </body>
 </html>
