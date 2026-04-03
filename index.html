@@ -6,65 +6,65 @@
 <title>Lead Finder - Guards Real Estate</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0a1628;--blue:#1052AC;--blue-l:#1a6fd8;--gold:#c9a84c;--gold-l:#f0d97a;--gray:#8a8f9e;--success:#1db954;--danger:#e53e3e;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--navy);color:#fff;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(16,82,172,.25) 0%,transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(201,168,76,.12) 0%,transparent 50%);pointer-events:none;z-index:0;}
-.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 24px 80px;}
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08);}
-.logo{display:flex;align-items:center;gap:14px;}
-.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--blue),var(--gold));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
-.logo h1{font-family:'DM Serif Display',serif;font-size:18px;}
-.logo p{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;}
-.status-pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray);background:rgba(255,255,255,.05);padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.08);}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--gray);}
-.dot.on{background:var(--success);box-shadow:0 0 6px var(--success);}
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;margin-bottom:20px;}
-.step-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:6px;}
-.card h2{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:4px;}
-.sub{font-size:13px;color:var(--gray);margin-bottom:18px;line-height:1.6;}
-.row{display:flex;gap:10px;}.row input{flex:1;}
-input,select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;width:100%;transition:border-color .2s;}
-input:focus,select:focus{border-color:var(--blue);}
-input::placeholder{color:rgba(255,255,255,.25);}
-select option{background:var(--navy);}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all .2s;}
-.btn-p{background:linear-gradient(135deg,var(--blue),var(--blue-l));color:#fff;}
-.btn-p:disabled{opacity:.5;cursor:not-allowed;}
-.btn-g{background:linear-gradient(135deg,var(--gold),var(--gold-l));color:#0a1628;font-weight:600;}
-.btn-g:disabled{opacity:.5;cursor:not-allowed;}
-.btn-gh{background:rgba(255,255,255,.06);color:var(--gray);border:1px solid rgba(255,255,255,.1);}
-.btn-gh:hover{background:rgba(255,255,255,.1);color:#fff;}
-.alert{padding:10px 14px;border-radius:10px;font-size:13px;margin-top:12px;display:none;}
-.alert.show{display:block;}
-.a-ok{background:rgba(29,185,84,.15);border:1px solid rgba(29,185,84,.3);color:#6ee7a0;}
-.a-err{background:rgba(229,62,62,.15);border:1px solid rgba(229,62,62,.3);color:#fc8181;}
-.a-info{background:rgba(16,82,172,.15);border:1px solid rgba(16,82,172,.3);color:#7eb8ff;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
-.field label{font-size:12px;color:var(--gray);display:block;margin-bottom:5px;}
-.pw{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin:14px 0;display:none;}
-.pb{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transition:width .4s;}
-.lb{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;font-family:monospace;font-size:12px;max-height:130px;overflow-y:auto;line-height:1.8;display:none;margin-top:12px;}
-.lok{color:var(--success);}.lwarn{color:var(--gold);}.lerr{color:var(--danger);}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
-.stat{background:rgba(255,255,255,.04);border-radius:12px;padding:14px;text-align:center;}
-.sn{font-family:'DM Serif Display',serif;font-size:26px;}
-.sl{font-size:11px;color:var(--gray);margin-top:3px;text-transform:uppercase;}
-.tw{overflow-x:auto;border-radius:12px;border:1px solid rgba(255,255,255,.08);}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-th{padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--gray);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(16,82,172,.15);white-space:nowrap;}
-td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;}
-tr:last-child td{border-bottom:none;}
-tr:hover td{background:rgba(255,255,255,.03);}
-.cn{font-weight:500;}.cnum{font-size:11px;color:var(--gray);}
-.dn{color:#7eb8ff;}.dr{font-size:11px;color:var(--gray);}
-.addr{font-size:12px;color:var(--gray);max-width:180px;line-height:1.5;}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;}
-.bok{background:rgba(29,185,84,.15);color:var(--success);}
-.bsic{background:rgba(16,82,172,.2);color:#7eb8ff;}
-.er{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;align-items:center;}
-.hint{font-size:12px;color:var(--gray);margin-left:auto;}
-.sm{padding:8px 16px;font-size:13px;}
+:root{--navy:#0a1628;--blue:#1052AC;--bl:#1a6fd8;--gold:#c9a84c;--gl:#f0d97a;--gray:#8a8f9e;--ok:#1db954;--err:#e53e3e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:#fff;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(16,82,172,.25) 0%,transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(201,168,76,.12) 0%,transparent 50%);pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.logo{display:flex;align-items:center;gap:14px}
+.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--blue),var(--gold));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo h1{font-family:'DM Serif Display',serif;font-size:18px}
+.logo p{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px}
+.pill{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray);background:rgba(255,255,255,.05);padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.08)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--gray)}
+.dot.on{background:var(--ok);box-shadow:0 0 6px var(--ok)}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;margin-bottom:20px}
+.lbl{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:6px}
+.card h2{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:4px}
+.sub{font-size:13px;color:var(--gray);margin-bottom:18px;line-height:1.6}
+.row{display:flex;gap:10px}.row input{flex:1}
+input,select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;width:100%;transition:border-color .2s}
+input:focus,select:focus{border-color:var(--blue)}
+input::placeholder{color:rgba(255,255,255,.25)}
+select option{background:var(--navy)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all .2s}
+.bp{background:linear-gradient(135deg,var(--blue),var(--bl));color:#fff}
+.bp:disabled{opacity:.5;cursor:not-allowed}
+.bg{background:linear-gradient(135deg,var(--gold),var(--gl));color:#0a1628;font-weight:600}
+.bg:disabled{opacity:.5;cursor:not-allowed}
+.bh{background:rgba(255,255,255,.06);color:var(--gray);border:1px solid rgba(255,255,255,.1)}
+.bh:hover{background:rgba(255,255,255,.1);color:#fff}
+.alert{padding:10px 14px;border-radius:10px;font-size:13px;margin-top:12px;display:none}
+.alert.show{display:block}
+.aok{background:rgba(29,185,84,.15);border:1px solid rgba(29,185,84,.3);color:#6ee7a0}
+.aerr{background:rgba(229,62,62,.15);border:1px solid rgba(229,62,62,.3);color:#fc8181}
+.ainf{background:rgba(16,82,172,.15);border:1px solid rgba(16,82,172,.3);color:#7eb8ff}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px}
+.fl label{font-size:12px;color:var(--gray);display:block;margin-bottom:5px}
+.pw{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin:14px 0;display:none}
+.pb{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:2px;transition:width .4s}
+.lb{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;font-family:monospace;font-size:12px;max-height:130px;overflow-y:auto;line-height:1.8;display:none;margin-top:12px}
+.lok{color:var(--ok)}.lwarn{color:var(--gold)}.lerr{color:var(--err)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat{background:rgba(255,255,255,.04);border-radius:12px;padding:14px;text-align:center}
+.sn{font-family:'DM Serif Display',serif;font-size:26px}
+.sl{font-size:11px;color:var(--gray);margin-top:3px;text-transform:uppercase}
+.tw{overflow-x:auto;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--gray);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(16,82,172,.15);white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.03)}
+.cn{font-weight:500}.cnum{font-size:11px;color:var(--gray)}
+.dn{color:#7eb8ff}.dr{font-size:11px;color:var(--gray)}
+.addr{font-size:12px;color:var(--gray);max-width:180px;line-height:1.5}
+.bdg{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
+.bok{background:rgba(29,185,84,.15);color:var(--ok)}
+.bsic{background:rgba(16,82,172,.2);color:#7eb8ff}
+.er{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;align-items:center}
+.hint{font-size:12px;color:var(--gray);margin-left:auto}
+.sm{padding:8px 16px;font-size:13px}
 </style>
 </head>
 <body>
@@ -74,38 +74,37 @@ tr:hover td{background:rgba(255,255,255,.03);}
       <div class="logo-icon">&#127970;</div>
       <div><h1>Lead Finder</h1><p>Guards Real Estate</p></div>
     </div>
-    <div class="status-pill">
-      <div class="dot" id="dot"></div>
-      <span id="stxt">Not connected</span>
-    </div>
+    <div class="pill"><div class="dot" id="dot"></div><span id="stxt">Not connected</span></div>
   </div>
+
   <div class="card">
-    <div class="step-label">Step 1</div>
+    <div class="lbl">Step 1</div>
     <h2>Connect API Key</h2>
     <p class="sub">Paste your Companies House Live API key and click Test Key.</p>
     <div class="row">
       <input type="password" id="K" placeholder="Paste your Companies House API key..." />
-      <button class="btn btn-p" onclick="testKey()">Test Key</button>
+      <button class="btn bp" onclick="window.testKey()">Test Key</button>
     </div>
-    <div class="alert" id="kalert"></div>
+    <div class="alert" id="KA"></div>
   </div>
+
   <div class="card">
-    <div class="step-label">Step 2</div>
+    <div class="lbl">Step 2</div>
     <h2>Search by Area</h2>
     <p class="sub">Enter a London area or postcode to find active property companies and their directors.</p>
     <div class="g3">
-      <div class="field"><label>Area or postcode</label><input type="text" id="A" placeholder="e.g. Mayfair, SW1, W1J" /></div>
-      <div class="field"><label>Property type</label>
+      <div class="fl"><label>Area or postcode</label><input type="text" id="A" placeholder="e.g. Mayfair, SW1, W1J" /></div>
+      <div class="fl"><label>Property type</label>
         <select id="S">
           <option value="">All property SIC codes</option>
-          <option value="68100">68100 - Buying/selling own property</option>
-          <option value="68200">68200 - Letting own property</option>
+          <option value="68100">68100 - Buying / selling own property</option>
+          <option value="68200">68200 - Letting own property (landlords)</option>
           <option value="68310">68310 - Estate agencies</option>
           <option value="68320">68320 - Property management</option>
         </select>
       </div>
-      <div class="field"><label>Max results</label>
-        <select id="M">
+      <div class="fl"><label>Max results</label>
+        <select id="MX">
           <option value="20">20 companies</option>
           <option value="50" selected>50 companies</option>
           <option value="100">100 companies</option>
@@ -113,154 +112,263 @@ tr:hover td{background:rgba(255,255,255,.03);}
       </div>
     </div>
     <div class="row">
-      <button class="btn btn-g" id="sbtn" onclick="doSearch()" disabled>Search Companies and Owners</button>
-      <button class="btn btn-gh" onclick="clearAll()">Clear</button>
+      <button class="btn bg" id="SB" onclick="window.doSearch()" disabled>Search Companies and Owners</button>
+      <button class="btn bh" onclick="window.clearAll()">Clear</button>
     </div>
-    <div class="pw" id="pw"><div class="pb" id="pb" style="width:0%"></div></div>
-    <div class="lb" id="lb"></div>
+    <div class="pw" id="PW"><div class="pb" id="PB" style="width:0%"></div></div>
+    <div class="lb" id="LB"></div>
   </div>
+
   <div class="card" id="RC" style="display:none">
-    <div class="step-label">Step 3 - Results</div>
+    <div class="lbl">Step 3 - Results</div>
     <h2 style="margin-bottom:14px">Lead List</h2>
     <div class="stats">
-      <div class="stat"><div class="sn" style="color:#7eb8ff" id="sc">0</div><div class="sl">Companies</div></div>
-      <div class="stat"><div class="sn" style="color:var(--gold)" id="sd">0</div><div class="sl">Directors</div></div>
-      <div class="stat"><div class="sn" style="color:var(--success)" id="sa">0</div><div class="sl">Active</div></div>
-      <div class="stat"><div class="sn" id="ss">All</div><div class="sl">Filter</div></div>
+      <div class="stat"><div class="sn" style="color:#7eb8ff" id="SC">0</div><div class="sl">Companies</div></div>
+      <div class="stat"><div class="sn" style="color:var(--gold)" id="SD">0</div><div class="sl">Directors</div></div>
+      <div class="stat"><div class="sn" style="color:var(--ok)" id="SA">0</div><div class="sl">Active</div></div>
+      <div class="stat"><div class="sn" id="SS">All</div><div class="sl">Filter</div></div>
     </div>
     <div class="tw">
       <table>
-        <thead><tr><th>Company</th><th>Director/Owner</th><th>Address</th><th>SIC</th><th>Status</th><th>Incorporated</th></tr></thead>
+        <thead><tr><th>Company</th><th>Director / Owner</th><th>Address</th><th>SIC</th><th>Status</th><th>Incorporated</th></tr></thead>
         <tbody id="TB"></tbody>
       </table>
     </div>
     <div class="er">
-      <button class="btn btn-p sm" onclick="exportCSV()">Export CSV</button>
-      <button class="btn btn-gh sm" onclick="copyAll()">Copy All</button>
-      <span class="hint" id="hint"></span>
+      <button class="btn bp sm" onclick="window.exportCSV()">Export CSV</button>
+      <button class="btn bh sm" onclick="window.copyAll()">Copy All</button>
+      <span class="hint" id="HT"></span>
     </div>
   </div>
 </div>
+
 <script>
-var leads=[];
-function getKey(){return document.getElementById('K').value.trim();}
-function callAPI(path){return fetch('/.netlify/functions/proxy?path='+encodeURIComponent(path)+'&key='+encodeURIComponent(getKey()));}
-function showAlert(id,msg,t){var e=document.getElementById(id);e.className='alert show a-'+t;e.textContent=msg;}
-function log(msg,t){var b=document.getElementById('lb');b.style.display='block';var d=document.createElement('div');d.className=t==='ok'?'lok':t==='warn'?'lwarn':t==='err'?'lerr':'';d.textContent='['+new Date().toLocaleTimeString('en-GB')+'] '+msg;b.appendChild(d);b.scrollTop=b.scrollHeight;}
-function prog(p){document.getElementById('pw').style.display='block';document.getElementById('pb').style.width=p+'%';}
-function fmtA(a){if(!a)return'-';if(typeof a==='string')return a;return[a.premises,a.address_line_1,a.address_line_2,a.locality,a.postal_code].filter(Boolean).join(', ')||'-';}
-function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
-async function testKey(){
-  var k=getKey();
-  if(!k){showAlert('kalert','Please paste your API key first.','err');return;}
-  showAlert('kalert','Testing connection...','info');
-  try{
-    var r=await callAPI('/search/companies?q=guards+real+estate&items_per_page=1');
-    if(r.ok){
-      document.getElementById('dot').className='dot on';
-      document.getElementById('stxt').textContent='Connected';
-      document.getElementById('sbtn').disabled=false;
-      showAlert('kalert','API key verified - ready to search.','ok');
-    }else{
-      showAlert('kalert','Error '+r.status+'. Check your key.','err');
+(function() {
+  var leads = [];
+
+  function getKey() { return document.getElementById('K').value.trim(); }
+
+  function callAPI(path) {
+    var k = getKey();
+    var url = '/.netlify/functions/proxy?path=' + encodeURIComponent(path) + '&key=' + encodeURIComponent(k);
+    return fetch(url);
+  }
+
+  function showAlert(id, msg, t) {
+    var e = document.getElementById(id);
+    e.className = 'alert show a' + t;
+    e.textContent = msg;
+  }
+
+  function addLog(msg, t) {
+    var b = document.getElementById('LB');
+    b.style.display = 'block';
+    var d = document.createElement('div');
+    d.className = t === 'ok' ? 'lok' : t === 'warn' ? 'lwarn' : t === 'err' ? 'lerr' : '';
+    d.textContent = '[' + new Date().toLocaleTimeString('en-GB') + '] ' + msg;
+    b.appendChild(d);
+    b.scrollTop = b.scrollHeight;
+  }
+
+  function setProgress(p) {
+    document.getElementById('PW').style.display = 'block';
+    document.getElementById('PB').style.width = p + '%';
+  }
+
+  function fmtAddr(a) {
+    if (!a) return '-';
+    if (typeof a === 'string') return a;
+    return [a.premises, a.address_line_1, a.address_line_2, a.locality, a.postal_code].filter(Boolean).join(', ') || '-';
+  }
+
+  function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+
+  window.testKey = async function() {
+    var k = getKey();
+    if (!k) { showAlert('KA', 'Please paste your API key first.', 'err'); return; }
+    showAlert('KA', 'Testing connection...', 'inf');
+    try {
+      var r = await callAPI('/search/companies?q=guards+real+estate&items_per_page=1');
+      if (r.ok) {
+        document.getElementById('dot').className = 'dot on';
+        document.getElementById('stxt').textContent = 'Connected';
+        document.getElementById('SB').disabled = false;
+        showAlert('KA', 'API key verified - ready to search.', 'ok');
+      } else {
+        showAlert('KA', 'Error ' + r.status + '. Check your key and try again.', 'err');
+      }
+    } catch (e) {
+      showAlert('KA', 'Connection failed: ' + e.message, 'err');
     }
-  }catch(e){showAlert('kalert','Connection failed: '+e.message,'err');}
-}
-async function doSearch(){
-  var area=document.getElementById('A').value.trim();
-  var sic=document.getElementById('S').value;
-  var maxR=parseInt(document.getElementById('M').value);
-  if(!area){alert('Please enter an area.');return;}
-  if(!getKey()){alert('Please connect your API key first.');return;}
-  leads=[];
-  document.getElementById('lb').innerHTML='';
-  document.getElementById('TB').innerHTML='';
-  document.getElementById('RC').style.display='none';
-  document.getElementById('sbtn').disabled=true;
-  document.getElementById('sbtn').textContent='Searching...';
-  log('Searching "'+area+'"...');
-  prog(5);
-  try{
-    var companies=[];
-    var sp=sic||'68100,68200,68310,68320';
-    var r1=await callAPI('/advanced-search/companies?location='+encodeURIComponent(area)+'&sic_codes='+sp+'&company_status=active&size='+maxR);
-    if(r1.ok){var d1=await r1.json();companies=d1.items||[];log('Found '+companies.length+' companies','ok');}
-    if(!companies.length){
-      log('Trying standard search...','warn');
-      var r2=await callAPI('/search/companies?q='+encodeURIComponent(area+' property')+'&items_per_page='+maxR);
-      if(r2.ok){var d2=await r2.json();companies=(d2.items||[]).filter(function(c){return!c.company_status||c.company_status==='active';});log('Found '+companies.length+' companies','ok');}
+  };
+
+  window.doSearch = async function() {
+    var area = document.getElementById('A').value.trim();
+    var sic  = document.getElementById('S').value;
+    var maxR = parseInt(document.getElementById('MX').value);
+    if (!area) { alert('Please enter an area or postcode.'); return; }
+    if (!getKey()) { alert('Please connect your API key first.'); return; }
+
+    leads = [];
+    document.getElementById('LB').innerHTML = '';
+    document.getElementById('TB').innerHTML = '';
+    document.getElementById('RC').style.display = 'none';
+    document.getElementById('SB').disabled = true;
+    document.getElementById('SB').textContent = 'Searching...';
+
+    addLog('Searching for "' + area + '"...');
+    setProgress(5);
+
+    try {
+      var companies = [];
+      var sp = sic || '68100,68200,68310,68320';
+
+      var r1 = await callAPI('/advanced-search/companies?location=' + encodeURIComponent(area) + '&sic_codes=' + sp + '&company_status=active&size=' + maxR);
+      if (r1.ok) {
+        var d1 = await r1.json();
+        companies = d1.items || [];
+        addLog('Found ' + companies.length + ' companies (advanced search)', 'ok');
+      }
+
+      if (!companies.length) {
+        addLog('Trying standard search...', 'warn');
+        var r2 = await callAPI('/search/companies?q=' + encodeURIComponent(area + ' property') + '&items_per_page=' + maxR);
+        if (r2.ok) {
+          var d2 = await r2.json();
+          companies = (d2.items || []).filter(function(c) { return !c.company_status || c.company_status === 'active'; });
+          addLog('Found ' + companies.length + ' companies (standard search)', 'ok');
+        }
+      }
+
+      if (!companies.length) {
+        addLog('No companies found. Try a different area.', 'warn');
+        document.getElementById('SB').disabled = false;
+        document.getElementById('SB').textContent = 'Search Companies and Owners';
+        return;
+      }
+
+      setProgress(15);
+      addLog('Fetching directors for each company...');
+
+      for (var i = 0; i < companies.length; i++) {
+        var co = companies[i];
+        var num = co.company_number;
+        if (!num) continue;
+        setProgress(15 + Math.floor((i / companies.length) * 75));
+
+        var officers = [];
+        var sics = co.sic_codes || [];
+
+        try {
+          var or2 = await callAPI('/company/' + num + '/officers');
+          if (or2.ok) {
+            var od = await or2.json();
+            officers = (od.items || []).filter(function(o) { return !o.resigned_on && (o.officer_role === 'director' || o.officer_role === 'llp-member'); });
+          }
+        } catch(e) {}
+
+        if (!sics.length) {
+          try {
+            var pr = await callAPI('/company/' + num);
+            if (pr.ok) { var pd = await pr.json(); sics = pd.sic_codes || []; }
+          } catch(e) {}
+        }
+
+        var lead = {
+          name: co.title || co.company_name || '-',
+          number: num,
+          status: co.company_status || 'active',
+          inc: co.date_of_creation || '-',
+          addr: fmtAddr(co.registered_office_address || co.address),
+          sics: sics,
+          dirs: officers.map(function(o) { return { name: o.name || '-', role: o.officer_role || '', addr: fmtAddr(o.address) }; })
+        };
+        leads.push(lead);
+
+        if (officers.length) addLog('OK ' + lead.name + ' - ' + officers.length + ' director(s)', 'ok');
+        else addLog('-- ' + lead.name + ' - no directors listed', 'warn');
+
+        await sleep(150);
+      }
+
+      setProgress(100);
+      addLog('Done. ' + leads.length + ' companies processed.', 'ok');
+      window.renderResults();
+
+    } catch(e) {
+      addLog('Error: ' + e.message, 'err');
     }
-    if(!companies.length){log('No companies found. Try different area.','warn');document.getElementById('sbtn').disabled=false;document.getElementById('sbtn').textContent='Search Companies and Owners';return;}
-    prog(15);log('Fetching directors...');
-    for(var i=0;i<companies.length;i++){
-      var co=companies[i];var num=co.company_number;if(!num)continue;
-      prog(15+Math.floor((i/companies.length)*75));
-      var officers=[];var sics=co.sic_codes||[];
-      try{var or=await callAPI('/company/'+num+'/officers');if(or.ok){var od=await or.json();officers=(od.items||[]).filter(function(o){return!o.resigned_on&&(o.officer_role==='director'||o.officer_role==='llp-member');});}}catch(e){}
-      if(!sics.length){try{var pr=await callAPI('/company/'+num);if(pr.ok){var pd=await pr.json();sics=pd.sic_codes||[];}}catch(e){}}
-      var lead={name:co.title||co.company_name||'-',number:num,status:co.company_status||'active',inc:co.date_of_creation||'-',addr:fmtA(co.registered_office_address||co.address),sics:sics,dirs:officers.map(function(o){return{name:o.name||'-',role:o.officer_role||'',addr:fmtA(o.address)};})};
-      leads.push(lead);
-      if(officers.length)log('OK '+lead.name+' - '+officers.length+' director(s)','ok');
-      else log('-- '+lead.name+' - no directors','warn');
-      await sleep(150);
-    }
-    prog(100);log('Done. '+leads.length+' companies.','ok');render();
-  }catch(e){log('Error: '+e.message,'err');}
-  document.getElementById('sbtn').disabled=false;
-  document.getElementById('sbtn').textContent='Search Companies and Owners';
-}
-function render(){
-  var tb=document.getElementById('TB');tb.innerHTML='';
-  var td=0,ta=0;
-  leads.forEach(function(lead){
-    var ia=lead.status==='active';if(ia)ta++;
-    var dirs=lead.dirs.length?lead.dirs:[{name:'Not listed',role:'',addr:''}];
-    td+=lead.dirs.length;
-    dirs.forEach(function(o,oi){
-      var tr=document.createElement('tr');
-      tr.innerHTML='<td>'+(oi===0?'<div class="cn">'+lead.name+'</div><div class="cnum">#'+lead.number+'</div>':'')+'</td>'+
-        '<td><div class="dn">'+o.name+'</div>'+(o.role?'<div class="dr">'+o.role+'</div>':'')+'</td>'+
-        '<td><div class="addr">'+(oi===0?lead.addr:o.addr||'-')+'</div></td>'+
-        '<td>'+(oi===0&&lead.sics.length?lead.sics.map(function(s){return'<span class="badge bsic">'+s+'</span>';}).join(' '):(oi===0?'-':''))+'</td>'+
-        '<td>'+(oi===0?'<span class="badge '+(ia?'bok':'')+'">'+(lead.status||'-')+'</span>':'')+'</td>'+
-        '<td style="font-size:12px;color:var(--gray)">'+(oi===0?lead.inc:'')+'</td>';
-      tb.appendChild(tr);
+
+    document.getElementById('SB').disabled = false;
+    document.getElementById('SB').textContent = 'Search Companies and Owners';
+  };
+
+  window.renderResults = function() {
+    var tb = document.getElementById('TB');
+    tb.innerHTML = '';
+    var td = 0, ta = 0;
+    leads.forEach(function(lead) {
+      var ia = lead.status === 'active';
+      if (ia) ta++;
+      var dirs = lead.dirs.length ? lead.dirs : [{ name: 'Not listed', role: '', addr: '' }];
+      td += lead.dirs.length;
+      dirs.forEach(function(o, oi) {
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td>' + (oi === 0 ? '<div class="cn">' + lead.name + '</div><div class="cnum">#' + lead.number + '</div>' : '') + '</td>' +
+          '<td><div class="dn">' + o.name + '</div>' + (o.role ? '<div class="dr">' + o.role + '</div>' : '') + '</td>' +
+          '<td><div class="addr">' + (oi === 0 ? lead.addr : o.addr || '-') + '</div></td>' +
+          '<td>' + (oi === 0 && lead.sics.length ? lead.sics.map(function(s) { return '<span class="bdg bsic">' + s + '</span>'; }).join(' ') : (oi === 0 ? '-' : '')) + '</td>' +
+          '<td>' + (oi === 0 ? '<span class="bdg ' + (ia ? 'bok' : '') + '">' + (lead.status || '-') + '</span>' : '') + '</td>' +
+          '<td style="font-size:12px;color:var(--gray)">' + (oi === 0 ? lead.inc : '') + '</td>';
+        tb.appendChild(tr);
+      });
     });
-  });
-  document.getElementById('sc').textContent=leads.length;
-  document.getElementById('sd').textContent=td;
-  document.getElementById('sa').textContent=ta;
-  document.getElementById('ss').textContent=document.getElementById('S').value||'All';
-  document.getElementById('hint').textContent=leads.length+' companies - '+td+' directors';
-  document.getElementById('RC').style.display='block';
-}
-function exportCSV(){
-  if(!leads.length)return;
-  var rows=[['Company','Number','Status','Incorporated','SIC','Director','Role','Address']];
-  leads.forEach(function(l){
-    if(!l.dirs.length)rows.push([l.name,l.number,l.status,l.inc,l.sics.join(';'),'Not listed','',l.addr]);
-    else l.dirs.forEach(function(o){rows.push([l.name,l.number,l.status,l.inc,l.sics.join(';'),o.name,o.role,l.addr]);});
-  });
-  var csv=rows.map(function(r){return r.map(function(c){return'"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('
-');
-  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='guards-leads-'+Date.now()+'.csv';a.click();
-}
-function copyAll(){
-  var t='';
-  leads.forEach(function(l){t+=l.name+' ('+l.number+')
-  Addr: '+l.addr+'
-';l.dirs.forEach(function(o){t+='  Director: '+o.name+' - '+o.role+'
-';});t+='
-';});
-  navigator.clipboard.writeText(t).then(function(){alert('Copied!');});
-}
-function clearAll(){
-  leads=[];document.getElementById('TB').innerHTML='';document.getElementById('RC').style.display='none';
-  document.getElementById('lb').innerHTML='';document.getElementById('lb').style.display='none';
-  document.getElementById('pw').style.display='none';document.getElementById('A').value='';
-}
-document.getElementById('K').addEventListener('keydown',function(e){if(e.key==='Enter')testKey();});
-document.getElementById('A').addEventListener('keydown',function(e){if(e.key==='Enter'&&!document.getElementById('sbtn').disabled)doSearch();});
+    document.getElementById('SC').textContent = leads.length;
+    document.getElementById('SD').textContent = td;
+    document.getElementById('SA').textContent = ta;
+    document.getElementById('SS').textContent = document.getElementById('S').value || 'All';
+    document.getElementById('HT').textContent = leads.length + ' companies - ' + td + ' directors';
+    document.getElementById('RC').style.display = 'block';
+  };
+
+  window.exportCSV = function() {
+    if (!leads.length) return;
+    var rows = [['Company', 'Number', 'Status', 'Incorporated', 'SIC', 'Director', 'Role', 'Address']];
+    leads.forEach(function(l) {
+      if (!l.dirs.length) rows.push([l.name, l.number, l.status, l.inc, l.sics.join(';'), 'Not listed', '', l.addr]);
+      else l.dirs.forEach(function(o) { rows.push([l.name, l.number, l.status, l.inc, l.sics.join(';'), o.name, o.role, l.addr]); });
+    });
+    var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = 'guards-leads-' + Date.now() + '.csv';
+    a.click();
+  };
+
+  window.copyAll = function() {
+    var t = '';
+    leads.forEach(function(l) {
+      t += l.name + ' (' + l.number + ')\n  Address: ' + l.addr + '\n';
+      l.dirs.forEach(function(o) { t += '  Director: ' + o.name + ' - ' + o.role + '\n'; });
+      t += '\n';
+    });
+    navigator.clipboard.writeText(t).then(function() { alert('Copied!'); });
+  };
+
+  window.clearAll = function() {
+    leads = [];
+    document.getElementById('TB').innerHTML = '';
+    document.getElementById('RC').style.display = 'none';
+    document.getElementById('LB').innerHTML = '';
+    document.getElementById('LB').style.display = 'none';
+    document.getElementById('PW').style.display = 'none';
+    document.getElementById('A').value = '';
+  };
+
+  document.getElementById('K').addEventListener('keydown', function(e) { if (e.key === 'Enter') window.testKey(); });
+  document.getElementById('A').addEventListener('keydown', function(e) { if (e.key === 'Enter' && !document.getElementById('SB').disabled) window.doSearch(); });
+})();
 </script>
 </body>
 </html>
